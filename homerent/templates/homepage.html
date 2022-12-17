@@ -1,11 +1,26 @@
-<div class="container">
-  {% include 'messages.html' %}
-    <form method="POST">
-      <fieldset>
-        <legend>Form</legend>
-        {% csrf_token %}
-        {{ form.as_table }}
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </fieldset>
-    </form>
-</div>
+
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  Hi {{ user.username }}!
+  <div class="container">
+    {% include 'messages.html' %}
+      <form method="POST">
+        <fieldset>
+          <legend>Form</legend>
+          {% csrf_token %}
+          {{ form.as_table }}
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </fieldset>
+      </form>
+  </div>
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">Log In</a>
+{% endif %}
+{% endblock %} 
+
+
