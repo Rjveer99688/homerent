@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Payment{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+  {% include 'messages.html' %}
+  <h3 class="color1">Bill Details:</h3>
+  <table class="table table-striped text-center">
+    <tr class="table-dark">
+      <th>Parameter</th>
+      <th>Value</th>
+    </tr>
+    <tr>
+      <td>Last Unit</td>
+      <td id="last_unit">{{bill.last_unit}}</td>
+    </tr>
+    <tr>
+      <td>New Unit</td>
+      <td id="new_unit">{{bill.new_unit}}</td>
+    </tr>
+    <tr>
+      <td>Tarrif</td>
+      <td id="tarrif">{{bill.tariff}}</td>
+    </tr>
+    <tr>
+      <td>Unit Consumed</td>
+      <td id="unit_consumed">{{bill.unit_consumed}}</td>
+    </tr>
+    <tr>
+      <td>E-Bill Amount</td>
+      <td id="ebill_amt">{{bill.ebill_amt}}</td>
+    </tr>
+    <tr>
+      <td>Rent</td>
+      <td id="rent">{{bill.rent}}</td>
+    </tr>
+    <tr>
+      <td>Balance</td>
+      <td id="balance">{{bill.balance}}</td>
+    </tr>
+    <tr>
+      <td>Fine</td>
+      <td id="fine">{{bill.fine}}</td>
+    </tr>
+    <tr>
+      <td>Total Bill</td>
+      <td id="toatl_bill">{{bill.total_amount}}</td>
+    </tr>
+  </table><br><br>
+
+
+  <form method="POST">
+    {% csrf_token %}
+    <p>Amount Paid:</p>
+    {{AmtPaidForm.paidamount}}
+    {{AmtPaidForm.non_field_errors |striptags}}<br><br>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+{% endblock %}

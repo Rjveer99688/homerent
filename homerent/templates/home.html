@@ -1,33 +1,158 @@
-<!-- {% extends 'base.html' %}
-
+{% extends 'base.html' %}
+{% load static %}
 {% block title %}Home{% endblock %}
 
+{% block styles %}
+<link href="{% static 'home/home.css' %}" type="text/css" rel="stylesheet">
+{% endblock %}
+
 {% block content %}
-{% if user.is_authenticated %}
-  Hi {{ user.username }}!
+
+<div class="container-fluid">
+  <section>
+    <div class="container py-5">
   
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="card mb-4">
+            <div class="card-body text-center">
+              <img src="{{profile.image.url}}" alt="avatar" class="rounded-circle img-fluid" style="width: 120px;">
+              <h5 class="my-3 heading color1">{{profile.username}}</h5>
+              <p class="text-muted mb-1">{{profile.full_name}}</p>
+              <p class="text-muted mb-4">{{profile.contact_no}}</p>
+            </div>
+          </div>
 
-  <form method="POST">
-    <fieldset>
-      <legend>Form</legend>
-      {% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </fieldset>
-  </form>
-{% else %}
-  <p>You are not logged in</p>
-  <a href="{% url 'login' %}">Log In</a>
-{% endif %}
-{% endblock %} -->
+          <div class="card mb-4 mb-lg-0">
+            <p class="color1 p-3 mb-0"><b>Tenant Details</b></p>
+            <div class="card-body p-0">
+              <ul class="list-group list-group-flush rounded-3">
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                  <p class="mb-0">Door No:</p>
+                  <p class="mb-0">{{profile.door_no}}</p>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                  <p class="mb-0">Building No:</p>
+                  <p class="mb-0">{{profile.building_no}}</p>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                  <p class="mb-0">Building Name:</p>
+                  <p class="mb-0">{{profile.building_name}}</p>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                  <p class="mb-0">Room Rent:</p>
+                  <p class="mb-0">{{profile.room_rent}}</p>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                  <p class="mb-0">Tarrif:</p>
+                  <p class="mb-0">{{profile.tarrif}}</p>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                  <p class="mb-0">Current Balance:</p>
+                  <p class="mb-0">{{profile.balance}}</p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="card mb-4">
+            <div class="card-body p-0">
+              <div class="row p-3 pb-0 color1">
+                <p><b>Meter Reading</b></p><br><br>
+                <div class="col-sm-8 color4">Enter your E-unit</div>
+                <div class="col-sm-4 text-center">
+                    {% if submitUnit %}
+                      <a href="{% url 'homerent:eunit' %}">
+                        <input type="button" class="btn btn-primary" value="Submit E-Unit">
+                      </a>
+                    {% else %}
+                      <input type="button" class="btn btn-secondary" value="Submit E-Unit" disabled>
+                      <p class="text-success">E-Unit already Up-To-Date </p>
+                    {% endif%}   
+                </div>
+              </div>
+              <hr>
+              <div class="row p-3 pt-0 color1">
+                <p><b>Payment Section</b></p><br><br>
+                <div class="col-sm-8 color4">Make Payment</div>
+                <div class="col-sm-4 text-center">
+                  {% if makePayment %}
+                    <a href="{% url 'homerent:payment' %}">
+                      <input type="button" class="btn btn-primary" value="Submit Paid Amount">
+                    </a>
+                  {% else %}
+                    <input type="button" class="btn btn-secondary" value="Submit Paid Amount" disabled>
+                    <p class="text-success">No New Bill Available </p>
+                  {% endif%}  
+                </div>
+              </div>
+            </div>
+          </div>
 
-<div class="container">
-<form method="POST">
-  <fieldset>
-    <legend>Form</legend>
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </fieldset>
-</form>
+          <div class="card p-3">
+            <div class="row">
+              <p><b class="color1">Previous Transactions</b></p>
+              <div class="table-responsive ">
+                <table class="table table-striped text-center bg-light ">
+                  <tr class="table-dark">
+                    <th>SL No.</th>
+                    <th>Transaction Date</th>
+                    <th>E-Unit</th>
+                    <th>Bill Amount</th>
+                    <th>Paid Amount</th>
+                    <th>Balance</th>
+                  </tr>
+                  {% for t in transaction.all %}
+                  <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{t.payment_id__created_at}}</td>
+                    <td>{{t.bill_id__new_unit}}</td>
+                    <td>{{t.total_amount}}</td>
+                    <td>{{t.amount_paid}}</td>
+                    <td>{{t.balance}}</td>
+                  </tr>
+                  {% endfor %}
+                </table>
+              </div>
+          </div>
+
+          {% if not makePayment %}
+          <div class="row">
+            <p><b class="color1">Transactions Pending for Approval</b></p>
+            <div class="table-responsive ">
+              <table class="table table-striped text-center bg-light ">
+                <tr class="table-dark">
+                  <th>SL No.</th>
+                  <th>Transaction Date</th>
+                  <th>E-Unit</th>
+                  <th>Bill Amount</th>
+                  <th>Paid Amount</th>
+                </tr>
+
+                {% for payment in lastPayment.all %}
+                <tr>
+                  <td>{{1}}</td>
+                  <td>{{payment.created_at}}</td>
+                  <td>{{payment.bill_id__new_unit}}</td>
+                  <td>{{payment.bill_id__total_amount}}</td>
+                  <td>{{payment.paidamount}}</td>
+                </tr>
+                {% endfor %}
+              </table>
+            </div>
+        </div>
+        {% endif %}
+        </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+ 
+
+
+
 </div>
+
+{% endblock %}

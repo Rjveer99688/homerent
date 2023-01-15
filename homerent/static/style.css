@@ -1,0 +1,181 @@
+/* Style the header with a grey background and some padding */
+ body{
+    margin: 0;
+    background-color: #eee;  background-size: 40px 40px;
+  /* background-image:
+    linear-gradient(to right, grey 1px, transparent 1px),
+    linear-gradient(to bottom, grey 1px, transparent 1px); */
+}
+
+.color1{color: #211D53;}
+.color2{color: #f753c0;}
+.color3{color: #FFDB99;}
+.color4{color: #222629;}
+.color5{color: #474B4F;}
+.color6{color: #6B6E70;}
+.color7{color: #86C232;}
+.color8{color: #61892F;}
+
+
+/*.sub_background, .card, .card-body, .list-group-item
+{
+  background-color: lightgray;
+}
+
+.color1{color: #211D53;}
+.color2{color: #f753c0;}
+.color3{color: #FFDB99;}
+.color4{color: #222629;}
+.color5{color: #474B4F;}
+.color6{color: #6B6E70;}
+.color7{color: #86C232;}
+.color8{color: #61892F;}
+
+
+.btn-primary
+{
+  background-color: #86C232;
+  border-color: #86C232;
+}
+.btn-primary:hover
+{
+  background-color: #61892F;
+  border-color: #61892F;
+}
+
+.btn-secondary:disabled
+{
+  background-color: #222629;
+  border-color: #222629;
+}
+
+
+
+.bgcolor1{background-color: #86C232;} */
+
+main
+{ 
+  position:relative;
+  min-height:100vh;
+  width: 100%;
+  margin:0;
+  padding: 10px;
+}
+
+.header {
+    overflow: hidden;
+    margin: 0;
+    padding: 5px 10px;
+  }
+
+  .header .username
+  {
+    font-size: 22px;
+    color: rgb(49, 48, 48);
+  }
+  
+  /* Style the header links */
+  .header a {
+    color: black;
+    text-align: center;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 25px;
+    border-radius: 4px;
+    display:inline-block;
+  }
+  
+  /* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
+  .header a.logo {
+    font-size: 25px;
+    font-weight: bold;
+  }
+  
+  /* Change the background color on mouse-over */
+  .header a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  /* Style the active/current link*/
+  .header a.active {
+    background-color: dodgerblue;
+    color: white;
+  }
+  
+  /* Float the link section to the right */
+  .header-right {
+    float: right;
+  }
+  
+  /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
+  @media screen and (max-width: 400px) {
+    .header a {
+      float: none;
+      display: block;
+      text-align: left;
+    }
+    .header-right {
+      float: none;
+    }
+    .header .username
+    {
+      font-size: 22px;
+      color: rgb(49, 48, 48);
+    }
+    
+  }
+
+/* Footer */
+footer {
+  text-align: justify;
+  padding: 1.5em 1em;
+  position: relative;
+  width: 100vw;
+  bottom: 0;  
+  color: rgb(24, 44, 85);
+}
+
+footer .footer_left 
+{
+  float: left; 
+  width:50%; 
+}
+footer .footer_right 
+{
+  float: right;
+  text-align: right; 
+  width:50%;
+}
+/* footer .footer_center { float:none; text-align:center;} */
+
+
+ 
+#left {
+  width:33%;
+  float:left;
+}
+#right {
+  width:33%;
+  float:left;
+  overflow:hidden !important;
+}
+#center {
+  float:left;
+  width:33%;
+  text-align:center;
+}
+
+
+.meter_box
+{
+  width: 300px;
+  height: 300px;
+  padding: 30px;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  align-items: center;
+  margin: auto auto;
+  margin-top: 100px;
+}

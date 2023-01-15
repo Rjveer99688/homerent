@@ -1,0 +1,44 @@
+.container
+{
+    height: 70%;
+}
+/* .row
+{
+    margin: auto 10px !important;
+}
+
+.div_left, .div_right
+{
+    min-height: 300px;
+    background-color: aqua;
+    padding: 30px;
+    border:1px solid red;
+}
+.card
+{
+    height: 200px;
+    width: 200px;
+    align-content: center;
+    border-radius: 5px !important;
+    margin-top: 50px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding: 50px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(to bottom, grey, white);
+} */
+
+
+/* @media screen and (min-width:800px) {
+    .card1
+    {
+        margin-right: 20px;
+    }
+    .card2
+    {
+        margin-left: 20px;
+    }
+} */
+
+
+

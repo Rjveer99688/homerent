@@ -1,12 +1,62 @@
-{% extends 'base.html' %}
+{% extends 'base_login.html' %}
+{% load static %}
 
 {% block title %}Login{% endblock %}
 
+{% block headers %}
+
+<link href="{% static 'login/login.css' %}" type="text/css" rel="stylesheet">
+
+
+{% endblock %}
+
 {% block content %}
-<h2>Log In</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
+<!-- <form method="post">
+
   <button type="submit">Log In</button>
+</form> -->
+
+
+<div class="grad"></div>
+<div class="cubes"></div>
+<form method="post">
+  <h2 class="colorgreen">SIGN IN</h2>
+  {% csrf_token %}
+  <div class="inputdiv">
+    <div>
+      {{ form.username }}
+      <div class="errorlist">
+        {{ form.username.errors |striptags }}
+      </div>
+    </div>
+
+    <div class="emailcont">
+      {{ form.password }}
+      <div class="eyeicon">
+        <ion-icon id="eyeoff" name="eye-off-outline"></ion-icon>
+        <ion-icon id="eyeon" name="eye-outline"></ion-icon>
+      </div>
+    </div>
+    <div class="errorlist">
+      {{ form.password.errors |striptags }}
+    </div>
+  </div>
+  <div class="data">
+    <p>Forget Password</p>
+    <!-- <p class="colorgreen">Sign up</p> -->
+  </div>
+  <div class="errorlist">
+    {{ form.non_field_errors |striptags }}
+    </div>
+  <button>Login</button>
 </form>
+
+{% endblock %}
+
+
+{% block scripts %}
+<script src="{% static 'login/login.js' %}"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
 {% endblock %}

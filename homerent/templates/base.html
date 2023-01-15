@@ -1,13 +1,58 @@
+{% if user.is_authenticated %}
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>{% block title %}Django Auth Tutorial{% endblock %}</title>
+  <meta charset="utf-8" name="viewport" content=" initial-scale=0.8">
+  <title>{% block title %}{% endblock %}</title>
+  
+  <!-- Stlying -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  
+  {% block styles %}
+  {% endblock %}
+  <link href="{% static 'style.css' %}" type="text/css" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
+
 <body>
+  <header class="header d-flex justify-content-between align-items-center">
+    <a href="{% url 'homerent:home' %}" class="logo mr-auto"> <img src="{% static 'images/logo.png' %}" alt="" class="img-fluid" width="40px" height="40px"></a>
+
+    <div class="header-right">
+      <a href="/accounts/logout" class="logo mr-auto"><i class="fa fa-sign-out" style="font-size:36px" title="Logout"></i></a>
+
+    </div>
+  </header>
   <main>
     {% block content %}
     {% endblock %}
   </main>
+
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  {% block scripts %}{% endblock %}
+  
 </body>
+<footer>
+
+  <div class=" text-center">
+    <p>© Copyright 2023 All Rights Reserved.</p>
+  </div>
+
+  <!-- <div class="footer_left small text-center">© Copyright 2023, All rights reserved.</div>
+  <div class="footer_right small text-center">Contact Us: +9036631403</div>       
+  <br style="clear: left;" /> -->
+</footer>
 </html>
+
+{% else %}
+<p>You are not logged in</p>
+<a href="{% url 'login' %}">Log In</a>
+
+{% endif %}
+
+

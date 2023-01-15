@@ -1,0 +1,24 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Eunit{% endblock %}
+
+
+{% block content %}
+
+
+  <div class="container-fluid">
+    {% include 'messages.html' %}
+    <div class="card meter_box">
+      <form method="POST">
+          {% csrf_token %}
+          <b class="color1">Meter Reading:</b>
+          {{MeterReading.unit}}
+          {{MeterReading.non_field_errors |striptags}}<br><br>
+          <button type="submit" class="btn btn-primary">Submit</button>
+
+      </form>
+      </div>
+  </div>
+{% endblock %} 
+
