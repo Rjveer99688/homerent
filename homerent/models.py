@@ -122,6 +122,7 @@ def execute_transaction(instance):
     tbill_id=instance.bill_id
     tpayment_id=instance
     ttotal_amount=instance.bill_id.total_amount 
+    tamount_paid=instance.paidamount
     tbalance=ttotal_amount-tamount_paid
 
     transactions = Transaction.objects.create(username=tusername,bill_id=tbill_id,payment_id=tpayment_id,total_amount=ttotal_amount,amount_paid=tamount_paid,balance=tbalance)
